@@ -554,6 +554,819 @@
           }
         }
       }
+    },
+"/api/tipopregunta": {
+  "get": {
+    "summary": "Obtener todos los tipos de pregunta",
+    "description": "Devuelve todos los tipos de pregunta disponibles.",
+    "responses": {
+      "200": {
+        "description": "Tipos de pregunta obtenidos con éxito.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "TipoPreguntaID": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "Tipo": {
+                    "type": "string",
+                    "example": "Multiple Choice"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "post": {
+    "summary": "Crear un nuevo tipo de pregunta",
+    "description": "Crea un nuevo tipo de pregunta con la descripción proporcionada.",
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "Tipo": {
+                "type": "string",
+                "example": "Multiple Choice"
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "201": {
+        "description": "Tipo de pregunta creado exitosamente.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Tipo de pregunta creado"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
+},
+"/api/tipopregunta/{id}": {
+  "get": {
+    "summary": "Obtener un tipo de pregunta por ID",
+    "description": "Devuelve un tipo de pregunta específico por su ID.",
+    "parameters": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "schema": {
+          "type": "integer"
+        },
+        "description": "ID del tipo de pregunta."
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Tipo de pregunta obtenido con éxito.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "TipoPreguntaID": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "Tipo": {
+                  "type": "string",
+                  "example": "Multiple Choice"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Tipo de pregunta no encontrado.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Tipo de pregunta no encontrado."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "put": {
+    "summary": "Actualizar un tipo de pregunta",
+    "description": "Actualiza un tipo de pregunta existente.",
+    "parameters": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "schema": {
+          "type": "integer"
+        },
+        "description": "ID del tipo de pregunta."
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "Tipo": {
+                "type": "string",
+                "example": "Single Choice"
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Tipo de pregunta actualizado con éxito.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Tipo de pregunta actualizado"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Tipo de pregunta no encontrado.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Tipo de pregunta no encontrado."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "delete": {
+    "summary": "Eliminar un tipo de pregunta",
+    "description": "Elimina un tipo de pregunta específico por su ID.",
+    "parameters": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "schema": {
+          "type": "integer"
+        },
+        "description": "ID del tipo de pregunta."
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Tipo de pregunta eliminado con éxito.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Tipo de pregunta eliminado"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Tipo de pregunta no encontrado.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Tipo de pregunta no encontrado."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+},
+"/api/pregunta": {
+  "get": {
+    "summary": "Obtener todas las preguntas",
+    "description": "Devuelve todas las preguntas registradas.",
+    "responses": {
+      "200": {
+        "description": "Preguntas obtenidas con éxito.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "PreguntaID": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "Contenido": {
+                    "type": "string",
+                    "example": "¿Cuál es la capital de Francia?"
+                  },
+                  "TipoPreguntaID": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "PruebaID": {
+                    "type": "integer",
+                    "example": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "post": {
+    "summary": "Crear una nueva pregunta",
+    "description": "Crea una nueva pregunta con los datos proporcionados.",
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "Contenido": {
+                "type": "string",
+                "example": "¿Cuál es la capital de Francia?"
+              },
+              "TipoPreguntaID": {
+                "type": "integer",
+                "example": 1
+              },
+              "PruebaID": {
+                "type": "integer",
+                "example": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "201": {
+        "description": "Pregunta creada exitosamente.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Pregunta creada"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+},
+"/api/pregunta/{id}": {
+  "get": {
+    "summary": "Obtener una pregunta por ID",
+    "description": "Devuelve una pregunta específica por su ID.",
+    "parameters": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "schema": {
+          "type": "integer"
+        },
+        "description": "ID de la pregunta."
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Pregunta obtenida con éxito.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "PreguntaID": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "Contenido": {
+                  "type": "string",
+                  "example": "¿Cuál es la capital de Francia?"
+                },
+                "TipoPreguntaID": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "PruebaID": {
+                  "type": "integer",
+                  "example": 1
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Pregunta no encontrada.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Pregunta no encontrada."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "put": {
+    "summary": "Actualizar una pregunta",
+    "description": "Actualiza una pregunta existente.",
+    "parameters": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "schema": {
+          "type": "integer"
+        },
+        "description": "ID de la pregunta."
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "Contenido": {
+                "type": "string",
+                "example": "¿Cuál es la capital de Alemania?"
+              },
+              "TipoPreguntaID": {
+                "type": "integer",
+                "example": 1
+              },
+              "PruebaID": {
+                "type": "integer",
+                "example": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Pregunta actualizada con éxito.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Pregunta actualizada"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Pregunta no encontrada.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Pregunta no encontrada."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "delete": {
+    "summary": "Eliminar una pregunta",
+    "description": "Elimina una pregunta específica por su ID.",
+    "parameters": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "schema": {
+          "type": "integer"
+        },
+        "description": "ID de la pregunta."
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Pregunta eliminada con éxito.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Pregunta eliminada"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Pregunta no encontrada.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Pregunta no encontrada."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+},
+"/api/prueba": {
+  "get": {
+    "summary": "Obtener todas las pruebas",
+    "description": "Devuelve todas las pruebas registradas.",
+    "responses": {
+      "200": {
+        "description": "Pruebas obtenidas con éxito.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "PruebaID": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "FechaReg": {
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2024-10-15T14:48:00Z"
+                  },
+                  "Instrucciones": {
+                    "type": "string",
+                    "example": "Por favor, responda todas las preguntas."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "post": {
+    "summary": "Crear una nueva prueba",
+    "description": "Crea una nueva prueba con los datos proporcionados.",
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "FechaReg": {
+                "type": "string",
+                "format": "date-time",
+                "example": "2024-10-15T14:48:00Z"
+              },
+              "Instrucciones": {
+                "type": "string",
+                "example": "Por favor, responda todas las preguntas."
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "201": {
+        "description": "Prueba creada exitosamente.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Prueba creada"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+},
+"/api/prueba/{id}": {
+  "get": {
+    "summary": "Obtener una prueba por ID",
+    "description": "Devuelve una prueba específica por su ID.",
+    "parameters": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "schema": {
+          "type": "integer"
+        },
+        "description": "ID de la prueba."
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Prueba obtenida con éxito.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "PruebaID": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "FechaReg": {
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2024-10-15T14:48:00Z"
+                },
+                "Instrucciones": {
+                  "type": "string",
+                  "example": "Por favor, responda todas las preguntas."
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Prueba no encontrada.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Prueba no encontrada."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "put": {
+    "summary": "Actualizar una prueba",
+    "description": "Actualiza una prueba existente.",
+    "parameters": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "schema": {
+          "type": "integer"
+        },
+        "description": "ID de la prueba."
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "FechaReg": {
+                "type": "string",
+                "format": "date-time",
+                "example": "2024-10-15T14:48:00Z"
+              },
+              "Instrucciones": {
+                "type": "string",
+                "example": "Por favor, responda todas las preguntas."
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Prueba actualizada con éxito.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Prueba actualizada"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Prueba no encontrada.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Prueba no encontrada."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "delete": {
+    "summary": "Eliminar una prueba",
+    "description": "Elimina una prueba específica por su ID.",
+    "parameters": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "schema": {
+          "type": "integer"
+        },
+        "description": "ID de la prueba."
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Prueba eliminada con éxito.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Prueba eliminada"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Prueba no encontrada.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Prueba no encontrada."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+},
+"components": {
+"schemas": {
+  "TipoPregunta": {
+    "type": "object",
+    "properties": {
+      "TipoPreguntaID": {
+        "type": "integer",
+        "example": 1
+      },
+      "Tipo": {
+        "type": "string",
+        "example": "Multiple Choice"
+      }
+    }
+  }
+}
+}
 }
