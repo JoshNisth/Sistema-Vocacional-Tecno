@@ -54,21 +54,27 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
         break;
 
-    case 'DELETE':
-        $data = json_decode(file_get_contents('php://input'), true);
-        if (isset($data['id'])) {
+        case 'DELETE':
+            $data = json_decode(file_get_contents('php://input'), true);
+            $preguntaId = $data['id'];
+            
+            $stmtRespuestas = $pdo->prepare("DELETE FROM Respuesta WHERE OpcionID IN (SELECT OpcionID FROM Opcion WHERE PreguntaID = :preguntaId)");
+            $stmtRespuestas->bindParam(':preguntaId', $preguntaId);
+            $stmtRespuestas->execute();
+        
+            $stmtOpciones = $pdo->prepare("DELETE FROM Opcion WHERE PreguntaID = :preguntaId");
+            $stmtOpciones->bindParam(':preguntaId', $preguntaId);
+            $stmtOpciones->execute();
+            
             $stmt = $pdo->prepare("DELETE FROM Pregunta WHERE PreguntaID = :id");
-            $stmt->bindParam(':id', $data['id']);
+            $stmt->bindParam(':id', $preguntaId);
             if ($stmt->execute()) {
                 echo json_encode(['status' => 'success', 'message' => 'Pregunta eliminada']);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Error al eliminar la pregunta']);
+                echo json_encode(['status' => 'error', 'message' => 'Error al eliminar']);
             }
-        } else {
-            echo json_encode(['status' => 'error', 'message' => 'Datos incompletos']);
-        }
-        break;
-
+            break;
+        
     default:
         echo json_encode(['status' => 'error', 'message' => 'Método no soportado']);
 }

@@ -52,20 +52,52 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
         break;
 
-    case 'DELETE':
-        $data = json_decode(file_get_contents('php://input'), true);
-        if (isset($data['id'])) {
-            $stmt = $pdo->prepare("DELETE FROM Prueba WHERE PruebaID = :id");
-            $stmt->bindParam(':id', $data['id']);
-            if ($stmt->execute()) {
-                echo json_encode(['status' => 'success', 'message' => 'Prueba eliminada']);
+        case 'DELETE':
+            $data = json_decode(file_get_contents('php://input'), true);
+            if (isset($data['id'])) {
+                // Primero, obtener todas las preguntas asociadas a la prueba
+                $stmtPreguntas = $pdo->prepare("SELECT PreguntaID FROM Pregunta WHERE PruebaID = :pruebaId");
+                $stmtPreguntas->bindParam(':pruebaId', $data['id']);
+                $stmtPreguntas->execute();
+                $preguntas = $stmtPreguntas->fetchAll(PDO::FETCH_COLUMN);
+        
+                // Luego, eliminar las respuestas asociadas a las opciones de las preguntas
+                if ($preguntas) {
+                    // Obtener todas las opciones asociadas a las preguntas
+                    $placeholders = rtrim(str_repeat('?,', count($preguntas)), ',');
+                    $stmtOpciones = $pdo->prepare("SELECT OpcionID FROM Opcion WHERE PreguntaID IN ($placeholders)");
+                    $stmtOpciones->execute($preguntas);
+                    $opciones = $stmtOpciones->fetchAll(PDO::FETCH_COLUMN);
+        
+                    // Eliminar las respuestas asociadas a las opciones
+                    if ($opciones) {
+                        $placeholdersRespuestas = rtrim(str_repeat('?,', count($opciones)), ',');
+                        $stmtRespuestas = $pdo->prepare("DELETE FROM Respuesta WHERE OpcionID IN ($placeholdersRespuestas)");
+                        $stmtRespuestas->execute($opciones);
+                    }
+        
+                    // Luego, eliminar las opciones asociadas a las preguntas
+                    $stmtOpcionesDelete = $pdo->prepare("DELETE FROM Opcion WHERE PreguntaID IN ($placeholders)");
+                    $stmtOpcionesDelete->execute($preguntas);
+                }
+        
+                // Ahora eliminar las preguntas asociadas a la prueba
+                $stmtPreguntasDelete = $pdo->prepare("DELETE FROM Pregunta WHERE PruebaID = :pruebaId");
+                $stmtPreguntasDelete->bindParam(':pruebaId', $data['id']);
+                $stmtPreguntasDelete->execute();
+        
+                // Finalmente, eliminar la prueba
+                $stmt = $pdo->prepare("DELETE FROM Prueba WHERE PruebaID = :id");
+                $stmt->bindParam(':id', $data['id']);
+                if ($stmt->execute()) {
+                    echo json_encode(['status' => 'success', 'message' => 'Prueba eliminada']);
+                } else {
+                    echo json_encode(['status' => 'error', 'message' => 'Error al eliminar la prueba']);
+                }
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Error al eliminar la prueba']);
+                echo json_encode(['status' => 'error', 'message' => 'Datos incompletos']);
             }
-        } else {
-            echo json_encode(['status' => 'error', 'message' => 'Datos incompletos']);
-        }
-        break;
+            break;        
 
     default:
         echo json_encode(['status' => 'error', 'message' => 'Método no soportado']);
