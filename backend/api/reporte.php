@@ -4,7 +4,6 @@ include_once '../config/conexion.php';
 header('Content-Type: application/json');
 
 try {
-    // Establecer conexión
     $pdo = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
