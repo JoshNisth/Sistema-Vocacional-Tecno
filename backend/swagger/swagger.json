@@ -1,0 +1,192 @@
+{
+    "paths": {
+      "/api/eliminar_usuario": {
+        "delete": {
+          "summary": "API para eliminar usuario con id y nombre",
+          "description": "Elimina un usuario específico de la base de datos si coincide el ID de usuario y el nombre proporcionados. La API tambien eliminara los resultados del usuario eliminado",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "usuarioid",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "ID del usuario."
+            },
+            {
+              "in": "query",
+              "name": "nombres",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "Nombre del usuario."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Usuario eliminado con éxito.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "success"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Usuario eliminado con éxito."
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "No se encontró un usuario con ese ID y nombre o faltan parámetros.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "error"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "No se encontró un usuario con ese ID y nombre."
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Error al ejecutar la consulta o error de conexión.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "error"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Error al ejecutar la consulta."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/reporte": {
+        "get": {
+          "summary": "API para mostrar los resultados segun el Id del usuario",
+          "description": "Muestra todos los resultados asociados a un usuario específico basándose en su ID.",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "usuarioid",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "ID del usuario."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Resultados encontrados para el usuario.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "success"
+                      },
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "resultadoid": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "usuarioid": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "puntuacion": {
+                              "type": "integer",
+                              "example": 85
+                            },
+                            "fecha": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-09-15T12:34:56Z"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Falta el parámetro usuarioid.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "error"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "No se encontraron resultados para este usuario."
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Error de conexión o error al ejecutar la consulta.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "error"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Error al ejecutar la consulta."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
