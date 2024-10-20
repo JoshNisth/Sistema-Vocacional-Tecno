@@ -1,7 +1,6 @@
-// src/router/index.js
 import { createRouter, createWebHistory } from 'vue-router';
-import Register from '../components/Register.vue';
-import Login from '../components/Login.vue';
+import Register from '../components/Register.vue'; // Importar desde components
+import Login from '../components/Login.vue'; // Importar desde components
 
 const routes = [
   {
@@ -14,10 +13,7 @@ const routes = [
     name: 'Login',
     component: Login,
   },
-  {
-    path: '/',
-    redirect: '/login', // Redirige a la página de inicio de sesión
-  },
+  // Otras rutas...
 ];
 
 const router = createRouter({
