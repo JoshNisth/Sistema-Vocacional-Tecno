@@ -1,4 +1,5 @@
 <template>
+    
     <div class="container mt-5">
         <h2 class="text-center">Registro de Usuario</h2>
         <form @submit.prevent="registerUser" class="bg-light p-4 rounded shadow">
