@@ -1,6 +1,6 @@
 <template>
     <div class="container mt-5">
-      <h2 class="text-center">Relaciones de Usuarios e Intereses</h2>
+      <h2 class="text-center">Relacion de Usuarios e Intereses</h2>
   
       <form @submit.prevent="addUsuarioInteres" class="bg-light p-4 rounded shadow mb-4">
         <div class="mb-3">
