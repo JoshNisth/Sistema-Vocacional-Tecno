@@ -14,6 +14,9 @@
             <router-link to="/login" class="nav-link">Inicio de Sesión</router-link>
           </li>
           <li class="nav-item">
+            <router-link to="/usuarios" class="nav-link">Lista de Usuarios</router-link> <!-- Enlace a lista de usuarios -->
+          </li>
+          <li class="nav-item">
             <router-link to="/tipos-pregunta" class="nav-link">Tipos de Pregunta</router-link>
           </li>
           <li class="nav-item">
