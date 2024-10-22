@@ -18,10 +18,12 @@
       </form>
   
       <ul class="list-group">
-        <li v-for="interes in intereses" :key="interes.id" class="list-group-item">
-          {{ interes.DescripcionInteres }}
+        <li v-for="interes in intereses" :key="interes.interesid" class="list-group-item">
+          ID: {{ interes.interesid }} - Descripción: {{ interes.descripcioninteres }}
         </li>
       </ul>
+
+
     </div>
   </template>
   
@@ -40,6 +42,7 @@
       async fetchIntereses() {
         try {
           const response = await axios.get('http://localhost/Sistema-Vocacional-Tecno/backend/api/intereses.php?interes'); 
+          console.log('Datos obtenidos de la API:', response.data); // Añadir esta línea
           this.intereses = response.data;
         } catch (error) {
           console.error('Error al obtener intereses:', error);

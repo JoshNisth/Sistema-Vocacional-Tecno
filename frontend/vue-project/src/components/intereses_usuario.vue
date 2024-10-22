@@ -63,8 +63,8 @@
       },
       // Método para agregar una nueva relación de usuario e interés
       async addUsuarioInteres() {
-        if (this.newUsuarioID.trim() === '' || this.newInteresID.trim() === '') return;
-  
+        if (!this.newUsuarioID || !this.newInteresID) return;
+
         try {
           const data = {
             UsuarioID: this.newUsuarioID,
