@@ -5,6 +5,7 @@
         {{ errorMessage }}
       </div>
       
+      <!-- Tabla de resultados -->
       <div v-if="resultados.length">
         <table class="table table-striped">
           <thead>
@@ -30,7 +31,13 @@
             </tr>
           </tbody>
         </table>
+        
+        <!-- Gráfico de Resultados -->
+        <div class="mt-5">
+          <canvas id="resultadosChart"></canvas>
+        </div>
       </div>
+      
       <div v-else>
         <p>No se encontraron resultados para este usuario.</p>
       </div>
@@ -39,6 +46,11 @@
   
   <script>
   import axios from 'axios';
+  import { Chart, registerables } from 'chart.js';
+  import { nextTick } from 'vue';
+  
+  // Registrar todos los componentes de Chart.js
+  Chart.register(...registerables);
   
   export default {
     data() {
@@ -62,6 +74,8 @@
           
           if (response.data.status === 'success') {
             this.resultados = response.data.data;
+            await nextTick(); // Esperar a que el DOM esté completamente actualizado
+            this.renderChart(); // Renderizar el gráfico cuando el DOM esté listo
           } else {
             this.errorMessage = response.data.message || 'No se encontraron resultados.';
           }
@@ -69,6 +83,56 @@
           console.error("Error al obtener el reporte:", error);
           this.errorMessage = 'Error al obtener el reporte.';
         }
+      },
+      
+      // Renderizar el gráfico de resultados
+      renderChart() {
+        const ctx = document.getElementById('resultadosChart').getContext('2d');
+        const data = this.resultados.map(resultado => ({
+          verbal: resultado.razonamientoverbal,
+          numerico: resultado.razonamientonumerico,
+          espacial: resultado.espacial,
+          clerical: resultado.clerical
+        }));
+  
+        const labels = this.resultados.map((_, index) => `Resultado ${index + 1}`);
+  
+        new Chart(ctx, {
+          type: 'bar', // Tipo de gráfico
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: 'Razonamiento Verbal',
+                backgroundColor: '#42A5F5',
+                data: data.map(d => d.verbal)
+              },
+              {
+                label: 'Razonamiento Numérico',
+                backgroundColor: '#66BB6A',
+                data: data.map(d => d.numerico)
+              },
+              {
+                label: 'Espacial',
+                backgroundColor: '#FFA726',
+                data: data.map(d => d.espacial)
+              },
+              {
+                label: 'Clerical',
+                backgroundColor: '#FF7043',
+                data: data.map(d => d.clerical)
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
       }
     }
   };
