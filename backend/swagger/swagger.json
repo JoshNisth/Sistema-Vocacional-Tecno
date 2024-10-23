@@ -1,7 +1,16 @@
 {
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "API Voca360",
+    "description": "API para gestionar usuarios, roles e intereses"
+  },
   "paths": {
     "/api/borrar_usuario": {
       "delete": {
+        "tags": [
+          "Usuario"
+        ],
         "summary": "API para eliminar usuario con id y nombre",
         "description": "Elimina un usuario específico de la base de datos si coincide el ID de usuario y el nombre proporcionados. La API también eliminará los resultados del usuario eliminado",
         "parameters": [
@@ -9,78 +18,62 @@
             "in": "query",
             "name": "usuarioid",
             "required": true,
-            "schema": {
-              "type": "integer"
-            },
+            "type": "integer",
             "description": "ID del usuario."
           },
           {
             "in": "query",
             "name": "nombres",
             "required": true,
-            "schema": {
-              "type": "string"
-            },
+            "type": "string",
             "description": "Nombre del usuario."
           }
         ],
         "responses": {
           "200": {
             "description": "Usuario eliminado con éxito.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "example": "success"
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Usuario eliminado con éxito."
-                    }
-                  }
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Usuario eliminado con éxito."
                 }
               }
             }
           },
           "400": {
             "description": "No se encontró un usuario con ese ID y nombre o faltan parámetros.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "No se encontró un usuario con ese ID y nombre."
-                    }
-                  }
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "No se encontró un usuario con ese ID y nombre."
                 }
               }
             }
           },
           "500": {
             "description": "Error al ejecutar la consulta o error de conexión.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Error al ejecutar la consulta."
-                    }
-                  }
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Error al ejecutar la consulta."
                 }
               }
             }
@@ -90,6 +83,9 @@
     },
     "/api/reporte": {
       "get": {
+        "tags": [
+          "Reporte"
+        ],
         "summary": "API para mostrar los resultados según el Id del usuario",
         "description": "Muestra todos los resultados asociados a un usuario específico basándose en su ID.",
         "parameters": [
@@ -97,47 +93,41 @@
             "in": "query",
             "name": "usuarioid",
             "required": true,
-            "schema": {
-              "type": "integer"
-            },
+            "type": "integer",
             "description": "ID del usuario."
           }
         ],
         "responses": {
           "200": {
             "description": "Resultados encontrados para el usuario.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "example": "success"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "resultadoid": {
-                            "type": "integer",
-                            "example": 1
-                          },
-                          "usuarioid": {
-                            "type": "integer",
-                            "example": 1
-                          },
-                          "puntuacion": {
-                            "type": "integer",
-                            "example": 85
-                          },
-                          "fecha": {
-                            "type": "string",
-                            "format": "date-time",
-                            "example": "2024-09-15T12:34:56Z"
-                          }
-                        }
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "resultadoid": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "usuarioid": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "puntuacion": {
+                        "type": "integer",
+                        "example": 85
+                      },
+                      "fecha": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-09-15T12:34:56Z"
                       }
                     }
                   }
@@ -147,40 +137,32 @@
           },
           "400": {
             "description": "Falta el parámetro usuarioid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "No se encontraron resultados para este usuario."
-                    }
-                  }
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "No se encontraron resultados para este usuario."
                 }
               }
             }
           },
           "500": {
             "description": "Error de conexión o error al ejecutar la consulta.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Error al ejecutar la consulta."
-                    }
-                  }
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Error al ejecutar la consulta."
                 }
               }
             }
@@ -190,45 +172,17 @@
     },
     "/api/intereses_usuario": {
       "get": {
+        "tags": [
+          "Intereses Usuario"
+        ],
         "summary": "Obtener todas las relaciones de intereses de usuarios",
         "description": "Devuelve todas las relaciones entre usuarios e intereses.",
         "responses": {
           "200": {
             "description": "Relaciones obtenidas con éxito",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "UsuarioID": {
-                        "type": "integer",
-                        "example": 1
-                      },
-                      "InteresID": {
-                        "type": "integer",
-                        "example": 2
-                      },
-                      "FechaRegistro": {
-                        "type": "string",
-                        "example": "2024-10-10T12:34:56Z"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "summary": "Crear una nueva relación de interés para un usuario",
-        "description": "Crea una nueva relación entre un usuario y un interés.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
+            "schema": {
+              "type": "array",
+              "items": {
                 "type": "object",
                 "properties": {
                   "UsuarioID": {
@@ -238,25 +192,53 @@
                   "InteresID": {
                     "type": "integer",
                     "example": 2
+                  },
+                  "FechaRegistro": {
+                    "type": "string",
+                    "example": "2024-10-10T12:34:56Z"
                   }
                 }
               }
             }
           }
-        },
+        }
+      },
+      "post": {
+        "tags": [
+          "Intereses Usuario"
+        ],
+        "summary": "Crear una nueva relación de interés para un usuario",
+        "description": "Crea una nueva relación entre un usuario y un interés.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "relacion",
+            "description": "Objeto que contiene los IDs de Usuario e Interés",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "UsuarioID": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "InteresID": {
+                  "type": "integer",
+                  "example": 2
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Relación creada exitosamente.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Relación creada"
-                    }
-                  }
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Relación creada"
                 }
               }
             }
@@ -266,43 +248,23 @@
     },
     "/api/intereses": {
       "get": {
+        "tags": [
+          "Intereses"
+        ],
         "summary": "Obtener todos los intereses",
         "description": "Devuelve todos los intereses disponibles.",
         "responses": {
           "200": {
             "description": "Intereses obtenidos con éxito",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "InteresID": {
-                        "type": "integer",
-                        "example": 1
-                      },
-                      "DescripcionInteres": {
-                        "type": "string",
-                        "example": "Deporte"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "summary": "Crear un nuevo interés",
-        "description": "Crea un nuevo interés con una descripción proporcionada.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
+            "schema": {
+              "type": "array",
+              "items": {
                 "type": "object",
                 "properties": {
+                  "InteresID": {
+                    "type": "integer",
+                    "example": 1
+                  },
                   "DescripcionInteres": {
                     "type": "string",
                     "example": "Deporte"
@@ -311,20 +273,40 @@
               }
             }
           }
-        },
+        }
+      },
+      "post": {
+        "tags": [
+          "Intereses"
+        ],
+        "summary": "Crear un nuevo interés",
+        "description": "Crea un nuevo interés con una descripción proporcionada.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "interes",
+            "description": "Objeto que contiene la descripción del interés",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "DescripcionInteres": {
+                  "type": "string",
+                  "example": "Deporte"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Interés creado exitosamente.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Interés creado"
-                    }
-                  }
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Interés creado"
                 }
               }
             }
@@ -334,43 +316,23 @@
     },
     "/api/roles": {
       "get": {
+        "tags": [
+          "Roles"
+        ],
         "summary": "Obtener todos los roles",
         "description": "Devuelve todos los roles disponibles.",
         "responses": {
           "200": {
             "description": "Roles obtenidos con éxito",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "RolID": {
-                        "type": "integer",
-                        "example": 1
-                      },
-                      "Nombre": {
-                        "type": "string",
-                        "example": "Admin"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "summary": "Crear un nuevo rol",
-        "description": "Crea un nuevo rol con un nombre proporcionado.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
+            "schema": {
+              "type": "array",
+              "items": {
                 "type": "object",
                 "properties": {
+                  "RolID": {
+                    "type": "integer",
+                    "example": 1
+                  },
                   "Nombre": {
                     "type": "string",
                     "example": "Admin"
@@ -379,20 +341,40 @@
               }
             }
           }
-        },
+        }
+      },
+      "post": {
+        "tags": [
+          "Roles"
+        ],
+        "summary": "Crear un nuevo rol",
+        "description": "Crea un nuevo rol con un nombre proporcionado.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "rol",
+            "description": "Objeto que contiene el nombre del rol",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Nombre": {
+                  "type": "string",
+                  "example": "Admin"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Rol creado exitosamente.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Rol creado"
-                    }
-                  }
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Rol creado"
                 }
               }
             }
@@ -402,70 +384,34 @@
     },
     "/api/usuarios": {
       "get": {
+        "tags": [
+          "Usuario"
+        ],
         "summary": "Obtener todos los usuarios",
         "description": "Devuelve todos los usuarios registrados.",
         "responses": {
           "200": {
             "description": "Usuarios obtenidos con éxito",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "UsuarioID": {
-                        "type": "integer",
-                        "example": 1
-                      },
-                      "Nombres": {
-                        "type": "string",
-                        "example": "Juan"
-                      },
-                      "Apellidos": {
-                        "type": "string",
-                        "example": "Pérez"
-                      },
-                      "Email": {
-                        "type": "string",
-                        "example": "juan@example.com"
-                      },
-                      "RolID": {
-                        "type": "integer",
-                        "example": 1
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "summary": "Crear un nuevo usuario",
-        "description": "Crea un nuevo usuario con los datos proporcionados.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
+            "schema": {
+              "type": "array",
+              "items": {
                 "type": "object",
                 "properties": {
+                  "UsuarioID": {
+                    "type": "integer",
+                    "example": 1
+                  },
                   "Nombres": {
                     "type": "string",
                     "example": "Juan"
                   },
                   "Apellidos": {
                     "type": "string",
-                    "example": "Pérez"
+                    "example": "Perez"
                   },
                   "Email": {
                     "type": "string",
                     "example": "juan@example.com"
-                  },
-                  "Contrasena": {
-                    "type": "string",
-                    "example": "password123"
                   },
                   "RolID": {
                     "type": "integer",
@@ -475,20 +421,56 @@
               }
             }
           }
-        },
+        }
+      },
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Crear un nuevo usuario",
+        "description": "Crea un nuevo usuario con los datos proporcionados.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "usuario",
+            "description": "Objeto que contiene los datos del usuario.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Nombres": {
+                  "type": "string",
+                  "example": "Juan"
+                },
+                "Apellidos": {
+                  "type": "string",
+                  "example": "Pérez"
+                },
+                "Email": {
+                  "type": "string",
+                  "example": "juan@example.com"
+                },
+                "Contrasena": {
+                  "type": "string",
+                  "example": "password123"
+                },
+                "RolID": {
+                  "type": "integer",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Usuario creado exitosamente.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Usuario creado"
-                    }
-                  }
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Usuario creado"
                 }
               }
             }
@@ -498,56 +480,53 @@
     },
     "/api/usuarios/login": {
       "post": {
+        "tags": [
+          "Usuario"
+        ],
         "summary": "Autenticar un usuario",
         "description": "Autentica un usuario utilizando el correo y contraseña.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "Email": {
-                    "type": "string",
-                    "example": "juan@example.com"
-                  },
-                  "Contrasena": {
-                    "type": "string",
-                    "example": "password123"
-                  }
+        "parameters": [
+          {
+            "in": "body",
+            "name": "autenticar",
+            "description": "Objeto que contiene los datos para la autenticación del usuario.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Email": {
+                  "type": "string",
+                  "example": "juan@example.com"
+                },
+                "Contrasena": {
+                  "type": "string",
+                  "example": "password123"
                 }
               }
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Autenticación exitosa.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Autenticación exitosa"
-                    }
-                  }
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Autenticación exitosa"
                 }
               }
             }
           },
           "401": {
             "description": "Credenciales incorrectas.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Credenciales incorrectas"
-                    }
-                  }
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Credenciales incorrectas"
                 }
               }
             }
@@ -557,63 +536,60 @@
     },
     "/api/registrar_respuesta.php": {
       "post": {
-        "tags": ["Respuestas"],
+        "tags": [
+          "Respuestas"
+        ],
         "summary": "Registrar respuesta de un usuario",
         "description": "Registra una respuesta de un usuario seleccionando una opción",
         "operationId": "registrarRespuesta",
-        "requestBody": {
-          "description": "Datos necesarios para registrar la respuesta",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "OpcionID": {
-                    "type": "integer",
-                    "description": "ID de la opción seleccionada",
-                    "example": 2
-                  },
-                  "UsuarioID": {
-                    "type": "integer",
-                    "description": "ID del usuario que responde",
-                    "example": 1
-                  }
+        "parameters": [
+          {
+            "in": "body",
+            "name": "registro_respuesta",
+            "description": "Datos necesarios para registrar la respuesta",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "OpcionID": {
+                  "type": "integer",
+                  "description": "ID de la opción seleccionada",
+                  "example": 2
                 },
-                "required": ["OpcionID", "UsuarioID"]
-              }
+                "UsuarioID": {
+                  "type": "integer",
+                  "description": "ID del usuario que responde",
+                  "example": 1
+                }
+              },
+              "required": [
+                "OpcionID",
+                "UsuarioID"
+              ]
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Respuesta registrada exitosamente",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Respuesta registrada exitosamente"
-                    }
-                  }
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Respuesta registrada exitosamente"
                 }
               }
             }
           },
           "400": {
             "description": "Datos incompletos",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "example": "Datos incompletos"
-                    }
-                  }
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Datos incompletos"
                 }
               }
             }
@@ -622,16 +598,19 @@
       }
     },
     "/api/calcular_resultado.php": {
-    "post": {
-      "tags": ["Resultados"],
-      "summary": "Calcular y almacenar resultados de las pruebas",
-      "description": "Calcula los resultados de las pruebas en función de las respuestas del usuario y almacena los resultados.",
-      "operationId": "calcularResultado",
-      "requestBody": {
-        "description": "Datos necesarios para calcular el resultado",
-        "required": true,
-        "content": {
-          "application/json": {
+      "post": {
+        "tags": [
+          "Resultados"
+        ],
+        "summary": "Calcular y almacenar resultados de las pruebas",
+        "description": "Calcula los resultados de las pruebas en función de las respuestas del usuario y almacena los resultados.",
+        "operationId": "calcularResultado",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "calculo_resultado",
+            "description": "Datos necesarios para calcular el resultado",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
@@ -641,102 +620,57 @@
                   "example": 1
                 }
               },
-              "required": ["UsuarioID"]
+              "required": [
+                "UsuarioID"
+              ]
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Resultado calculado y almacenado correctamente",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Resultado calculado y almacenado correctamente"
-                    }
-                  }
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Resultado calculado y almacenado correctamente"
                 }
               }
             }
           },
           "400": {
             "description": "Datos incompletos",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "example": "Datos incompletos"
-                    }
-                  }
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Datos incompletos"
                 }
               }
             }
           },
           "404": {
             "description": "No se encontraron respuestas para este usuario",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "example": "No se encontraron respuestas para este usuario"
-                    }
-                  }
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "No se encontraron respuestas para este usuario"
                 }
               }
             }
           },
           "500": {
             "description": "Error interno del servidor",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "example": "Error interno del servidor"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "/api/tipopregunta": {
-    "get": {
-      "summary": "Obtener todos los tipos de pregunta",
-      "description": "Devuelve todos los tipos de pregunta disponibles.",
-      "responses": {
-        "200": {
-          "description": "Tipos de pregunta obtenidos con éxito.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "TipoPreguntaID": {
-                      "type": "integer",
-                      "example": 1
-                    },
-                    "Tipo": {
-                      "type": "string",
-                      "example": "Multiple Choice"
-                    }
-                  }
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Error interno del servidor"
                 }
               }
             }
@@ -744,65 +678,19 @@
         }
       }
     },
-    "post": {
-      "summary": "Crear un nuevo tipo de pregunta",
-      "description": "Crea un nuevo tipo de pregunta con la descripción proporcionada.",
-      "requestBody": {
-        "content": {
-          "application/json": {
+    "/api/tipopregunta": {
+      "get": {
+        "tags": [
+          "Tipo pregunta"
+        ],
+        "summary": "Obtener todos los tipos de pregunta",
+        "description": "Devuelve todos los tipos de pregunta disponibles.",
+        "responses": {
+          "200": {
+            "description": "Tipos de pregunta obtenidos con éxito.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "Tipo": {
-                  "type": "string",
-                  "example": "Multiple Choice"
-                }
-              }
-            }
-          }
-        }
-      },
-      "responses": {
-        "201": {
-          "description": "Tipo de pregunta creado exitosamente.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "message": {
-                    "type": "string",
-                    "example": "Tipo de pregunta creado"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "/api/tipopregunta/{id}": {
-    "get": {
-      "summary": "Obtener un tipo de pregunta por ID",
-      "description": "Devuelve un tipo de pregunta específico por su ID.",
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "schema": {
-            "type": "integer"
-          },
-          "description": "ID del tipo de pregunta."
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Tipo de pregunta obtenido con éxito.",
-          "content": {
-            "application/json": {
-              "schema": {
+              "type": "array",
+              "items": {
                 "type": "object",
                 "properties": {
                   "TipoPreguntaID": {
@@ -817,22 +705,40 @@
               }
             }
           }
-        },
-        "404": {
-          "description": "Tipo de pregunta no encontrado.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "status": {
-                    "type": "string",
-                    "example": "error"
-                  },
-                  "message": {
-                    "type": "string",
-                    "example": "Tipo de pregunta no encontrado."
-                  }
+        }
+      },
+      "post": {
+        "tags": [
+          "Tipo pregunta"
+        ],
+        "summary": "Crear un nuevo tipo de pregunta",
+        "description": "Crea un nuevo tipo de pregunta con la descripción proporcionada.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Datos para crear un nuevo tipo de pregunta",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Tipo": {
+                  "type": "string",
+                  "example": "Multiple Choice"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Tipo de pregunta creado exitosamente.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Tipo de pregunta creado"
                 }
               }
             }
@@ -840,23 +746,76 @@
         }
       }
     },
-    "put": {
-      "summary": "Actualizar un tipo de pregunta",
-      "description": "Actualiza un tipo de pregunta existente.",
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "schema": {
-            "type": "integer"
+    "/api/tipopregunta/{id}": {
+      "get": {
+        "tags": [
+          "Tipo pregunta"
+        ],
+        "summary": "Obtener un tipo de pregunta por ID",
+        "description": "Devuelve un tipo de pregunta específico por su ID.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "description": "ID del tipo de pregunta."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tipo de pregunta obtenido con éxito.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "TipoPreguntaID": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "Tipo": {
+                  "type": "string",
+                  "example": "Multiple Choice"
+                }
+              }
+            }
           },
-          "description": "ID del tipo de pregunta."
+          "404": {
+            "description": "Tipo de pregunta no encontrado.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Tipo de pregunta no encontrado."
+                }
+              }
+            }
+          }
         }
-      ],
-      "requestBody": {
-        "content": {
-          "application/json": {
+      },
+      "put": {
+        "tags": [
+          "Tipo pregunta"
+        ],
+        "summary": "Actualizar un tipo de pregunta",
+        "description": "Actualiza un tipo de pregunta existente.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "description": "ID del tipo de pregunta."
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Datos para actualizar el tipo de pregunta",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
@@ -867,206 +826,98 @@
               }
             }
           }
-        }
-      },
-      "responses": {
-        "200": {
-          "description": "Tipo de pregunta actualizado con éxito.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "message": {
-                    "type": "string",
-                    "example": "Tipo de pregunta actualizado"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "404": {
-          "description": "Tipo de pregunta no encontrado.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "status": {
-                    "type": "string",
-                    "example": "error"
-                  },
-                  "message": {
-                    "type": "string",
-                    "example": "Tipo de pregunta no encontrado."
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "delete": {
-      "summary": "Eliminar un tipo de pregunta",
-      "description": "Elimina un tipo de pregunta específico por su ID.",
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "schema": {
-            "type": "integer"
-          },
-          "description": "ID del tipo de pregunta."
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Tipo de pregunta eliminado con éxito.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "message": {
-                    "type": "string",
-                    "example": "Tipo de pregunta eliminado"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "404": {
-          "description": "Tipo de pregunta no encontrado.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "status": {
-                    "type": "string",
-                    "example": "error"
-                  },
-                  "message": {
-                    "type": "string",
-                    "example": "Tipo de pregunta no encontrado."
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "/api/pregunta": {
-    "get": {
-      "summary": "Obtener todas las preguntas",
-      "description": "Devuelve todas las preguntas registradas.",
-      "responses": {
-        "200": {
-          "description": "Preguntas obtenidas con éxito.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "PreguntaID": {
-                      "type": "integer",
-                      "example": 1
-                    },
-                    "Contenido": {
-                      "type": "string",
-                      "example": "¿Cuál es la capital de Francia?"
-                    },
-                    "TipoPreguntaID": {
-                      "type": "integer",
-                      "example": 1
-                    },
-                    "PruebaID": {
-                      "type": "integer",
-                      "example": 1
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "post": {
-      "summary": "Crear una nueva pregunta",
-      "description": "Crea una nueva pregunta con los datos proporcionados.",
-      "requestBody": {
-        "content": {
-          "application/json": {
+        ],
+        "responses": {
+          "200": {
+            "description": "Tipo de pregunta actualizado con éxito.",
             "schema": {
               "type": "object",
               "properties": {
-                "Contenido": {
+                "message": {
                   "type": "string",
-                  "example": "¿Cuál es la capital de Francia?"
+                  "example": "Tipo de pregunta actualizado"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Tipo de pregunta no encontrado.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
                 },
-                "TipoPreguntaID": {
-                  "type": "integer",
-                  "example": 1
-                },
-                "PruebaID": {
-                  "type": "integer",
-                  "example": 1
+                "message": {
+                  "type": "string",
+                  "example": "Tipo de pregunta no encontrado."
                 }
               }
             }
           }
         }
       },
-      "responses": {
-        "201": {
-          "description": "Pregunta creada exitosamente.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "message": {
-                    "type": "string",
-                    "example": "Pregunta creada"
-                  }
+      "delete": {
+        "tags": [
+          "Tipo pregunta"
+        ],
+        "summary": "Eliminar un tipo de pregunta",
+        "description": "Elimina un tipo de pregunta específico por su ID.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "description": "ID del tipo de pregunta."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tipo de pregunta eliminado con éxito.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Tipo de pregunta eliminado"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Tipo de pregunta no encontrado.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Tipo de pregunta no encontrado."
                 }
               }
             }
           }
         }
       }
-    }
-  },
-  "/api/pregunta/{id}": {
-    "get": {
-      "summary": "Obtener una pregunta por ID",
-      "description": "Devuelve una pregunta específica por su ID.",
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "schema": {
-            "type": "integer"
-          },
-          "description": "ID de la pregunta."
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Pregunta obtenida con éxito.",
-          "content": {
-            "application/json": {
-              "schema": {
+    },
+    "/api/pregunta": {
+      "get": {
+        "tags": [
+          "Pregunta"
+        ],
+        "summary": "Obtener todas las preguntas",
+        "description": "Devuelve todas las preguntas registradas.",
+        "responses": {
+          "200": {
+            "description": "Preguntas obtenidas con éxito.",
+            "schema": {
+              "type": "array",
+              "items": {
                 "type": "object",
                 "properties": {
                   "PreguntaID": {
@@ -1089,22 +940,48 @@
               }
             }
           }
-        },
-        "404": {
-          "description": "Pregunta no encontrada.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "status": {
-                    "type": "string",
-                    "example": "error"
-                  },
-                  "message": {
-                    "type": "string",
-                    "example": "Pregunta no encontrada."
-                  }
+        }
+      },
+      "post": {
+        "tags": [
+          "Pregunta"
+        ],
+        "summary": "Crear una nueva pregunta",
+        "description": "Crea una nueva pregunta con los datos proporcionados.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Datos para crear una nueva pregunta",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Contenido": {
+                  "type": "string",
+                  "example": "¿Cuál es la capital de Francia?"
+                },
+                "TipoPreguntaID": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "PruebaID": {
+                  "type": "integer",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Pregunta creada exitosamente.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Pregunta creada"
                 }
               }
             }
@@ -1112,23 +989,84 @@
         }
       }
     },
-    "put": {
-      "summary": "Actualizar una pregunta",
-      "description": "Actualiza una pregunta existente.",
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "schema": {
-            "type": "integer"
+    "/api/pregunta/{id}": {
+      "get": {
+        "tags": [
+          "Pregunta"
+        ],
+        "summary": "Obtener una pregunta por ID",
+        "description": "Devuelve una pregunta específica por su ID.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "description": "ID de la pregunta."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pregunta obtenida con éxito.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "PreguntaID": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "Contenido": {
+                  "type": "string",
+                  "example": "¿Cuál es la capital de Francia?"
+                },
+                "TipoPreguntaID": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "PruebaID": {
+                  "type": "integer",
+                  "example": 1
+                }
+              }
+            }
           },
-          "description": "ID de la pregunta."
+          "404": {
+            "description": "Pregunta no encontrada.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Pregunta no encontrada."
+                }
+              }
+            }
+          }
         }
-      ],
-      "requestBody": {
-        "content": {
-          "application/json": {
+      },
+      "put": {
+        "tags": [
+          "Pregunta"
+        ],
+        "summary": "Actualizar una pregunta",
+        "description": "Actualiza una pregunta existente.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "description": "ID de la pregunta."
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Datos para actualizar la pregunta",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
@@ -1147,200 +1085,98 @@
               }
             }
           }
-        }
-      },
-      "responses": {
-        "200": {
-          "description": "Pregunta actualizada con éxito.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "message": {
-                    "type": "string",
-                    "example": "Pregunta actualizada"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "404": {
-          "description": "Pregunta no encontrada.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "status": {
-                    "type": "string",
-                    "example": "error"
-                  },
-                  "message": {
-                    "type": "string",
-                    "example": "Pregunta no encontrada."
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "delete": {
-      "summary": "Eliminar una pregunta",
-      "description": "Elimina una pregunta específica por su ID.",
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "schema": {
-            "type": "integer"
-          },
-          "description": "ID de la pregunta."
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Pregunta eliminada con éxito.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "message": {
-                    "type": "string",
-                    "example": "Pregunta eliminada"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "404": {
-          "description": "Pregunta no encontrada.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "status": {
-                    "type": "string",
-                    "example": "error"
-                  },
-                  "message": {
-                    "type": "string",
-                    "example": "Pregunta no encontrada."
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "/api/prueba": {
-    "get": {
-      "summary": "Obtener todas las pruebas",
-      "description": "Devuelve todas las pruebas registradas.",
-      "responses": {
-        "200": {
-          "description": "Pruebas obtenidas con éxito.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "PruebaID": {
-                      "type": "integer",
-                      "example": 1
-                    },
-                    "FechaReg": {
-                      "type": "string",
-                      "format": "date-time",
-                      "example": "2024-10-15T14:48:00Z"
-                    },
-                    "Instrucciones": {
-                      "type": "string",
-                      "example": "Por favor, responda todas las preguntas."
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "post": {
-      "summary": "Crear una nueva prueba",
-      "description": "Crea una nueva prueba con los datos proporcionados.",
-      "requestBody": {
-        "content": {
-          "application/json": {
+        ],
+        "responses": {
+          "200": {
+            "description": "Pregunta actualizada con éxito.",
             "schema": {
               "type": "object",
               "properties": {
-                "FechaReg": {
+                "message": {
                   "type": "string",
-                  "format": "date-time",
-                  "example": "2024-10-15T14:48:00Z"
+                  "example": "Pregunta actualizada"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Pregunta no encontrada.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
                 },
-                "Instrucciones": {
+                "message": {
                   "type": "string",
-                  "example": "Por favor, responda todas las preguntas."
+                  "example": "Pregunta no encontrada."
                 }
               }
             }
           }
         }
       },
-      "responses": {
-        "201": {
-          "description": "Prueba creada exitosamente.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "message": {
-                    "type": "string",
-                    "example": "Prueba creada"
-                  }
+      "delete": {
+        "tags": [
+          "Pregunta"
+        ],
+        "summary": "Eliminar una pregunta",
+        "description": "Elimina una pregunta específica por su ID.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "description": "ID de la pregunta."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pregunta eliminada con éxito.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Pregunta eliminada"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Pregunta no encontrada.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Pregunta no encontrada."
                 }
               }
             }
           }
         }
       }
-    }
-  },
-  "/api/prueba/{id}": {
-    "get": {
-      "summary": "Obtener una prueba por ID",
-      "description": "Devuelve una prueba específica por su ID.",
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "schema": {
-            "type": "integer"
-          },
-          "description": "ID de la prueba."
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Prueba obtenida con éxito.",
-          "content": {
-            "application/json": {
-              "schema": {
+    },
+    "/api/prueba": {
+      "get": {
+        "tags": [
+          "Prueba"
+        ],
+        "summary": "Obtener todas las pruebas",
+        "description": "Devuelve todas las pruebas registradas.",
+        "responses": {
+          "200": {
+            "description": "Pruebas obtenidas con éxito.",
+            "schema": {
+              "type": "array",
+              "items": {
                 "type": "object",
                 "properties": {
                   "PruebaID": {
@@ -1360,46 +1196,20 @@
               }
             }
           }
-        },
-        "404": {
-          "description": "Prueba no encontrada.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "status": {
-                    "type": "string",
-                    "example": "error"
-                  },
-                  "message": {
-                    "type": "string",
-                    "example": "Prueba no encontrada."
-                  }
-                }
-              }
-            }
-          }
         }
-      }
-    },
-    "put": {
-      "summary": "Actualizar una prueba",
-      "description": "Actualiza una prueba existente.",
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "schema": {
-            "type": "integer"
-          },
-          "description": "ID de la prueba."
-        }
-      ],
-      "requestBody": {
-        "content": {
-          "application/json": {
+      },
+      "post": {
+        "tags": [
+          "Prueba"
+        ],
+        "summary": "Crear una nueva prueba",
+        "description": "Crea una nueva prueba con los datos proporcionados.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Datos de la nueva prueba",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
@@ -1415,40 +1225,16 @@
               }
             }
           }
-        }
-      },
-      "responses": {
-        "200": {
-          "description": "Prueba actualizada con éxito.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "message": {
-                    "type": "string",
-                    "example": "Prueba actualizada"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "404": {
-          "description": "Prueba no encontrada.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "status": {
-                    "type": "string",
-                    "example": "error"
-                  },
-                  "message": {
-                    "type": "string",
-                    "example": "Prueba no encontrada."
-                  }
+        ],
+        "responses": {
+          "201": {
+            "description": "Prueba creada exitosamente.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Prueba creada"
                 }
               }
             }
@@ -1456,52 +1242,167 @@
         }
       }
     },
-    "delete": {
-      "summary": "Eliminar una prueba",
-      "description": "Elimina una prueba específica por su ID.",
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "schema": {
-            "type": "integer"
+    "/api/prueba/{id}": {
+      "get": {
+        "tags": [
+          "Prueba"
+        ],
+        "summary": "Obtener una prueba por ID",
+        "description": "Devuelve una prueba específica por su ID.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "description": "ID de la prueba."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Prueba obtenida con éxito.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "PruebaID": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "FechaReg": {
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2024-10-15T14:48:00Z"
+                },
+                "Instrucciones": {
+                  "type": "string",
+                  "example": "Por favor, responda todas las preguntas."
+                }
+              }
+            }
           },
-          "description": "ID de la prueba."
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Prueba eliminada con éxito.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "message": {
-                    "type": "string",
-                    "example": "Prueba eliminada"
-                  }
+          "404": {
+            "description": "Prueba no encontrada.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Prueba no encontrada."
                 }
               }
             }
           }
-        },
-        "404": {
-          "description": "Prueba no encontrada.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "status": {
-                    "type": "string",
-                    "example": "error"
-                  },
-                  "message": {
-                    "type": "string",
-                    "example": "Prueba no encontrada."
-                  }
+        }
+      },
+      "put": {
+        "tags": [
+          "Prueba"
+        ],
+        "summary": "Actualizar una prueba",
+        "description": "Actualiza una prueba existente.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "description": "ID de la prueba."
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Datos de la prueba que se actualizarán",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "FechaReg": {
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2024-10-15T14:48:00Z"
+                },
+                "Instrucciones": {
+                  "type": "string",
+                  "example": "Por favor, responda todas las preguntas."
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Prueba actualizada con éxito.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Prueba actualizada"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Prueba no encontrada.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Prueba no encontrada."
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Prueba"
+        ],
+        "summary": "Eliminar una prueba",
+        "description": "Elimina una prueba específica por su ID.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "description": "ID de la prueba."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Prueba eliminada con éxito.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Prueba eliminada"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Prueba no encontrada",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Prueba no encontrada"
                 }
               }
             }
@@ -1509,23 +1410,5 @@
         }
       }
     }
-  }
-  },
-  "components": {
-  "schemas": {
-    "TipoPregunta": {
-      "type": "object",
-      "properties": {
-        "TipoPreguntaID": {
-          "type": "integer",
-          "example": 1
-        },
-        "Tipo": {
-          "type": "string",
-          "example": "Multiple Choice"
-        }
-      }
-    }
-  }
   }
 }

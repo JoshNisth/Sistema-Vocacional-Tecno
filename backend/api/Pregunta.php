@@ -1,10 +1,10 @@
 <?php
 require '../config/conexion.php';
 
-header("Access-Control-Allow-Origin: *");  // Esto permite solicitudes desde cualquier origen
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS"); // Métodos permitidos
-header("Access-Control-Allow-Headers: Content-Type, Authorization"); // Encabezados permitidos
-header("Content-Type: application/json");
+header('Content-Type: application/json');
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':

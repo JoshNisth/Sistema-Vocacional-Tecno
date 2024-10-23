@@ -4,7 +4,7 @@ include_once '../config/conexion.php';
 
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS");  // Incluye DELETE
+header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
@@ -13,6 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
         $nombres = $_GET['nombres'];
 
         try {
+            $pdo = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $user, $password);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $queryResultado = "DELETE FROM resultado WHERE usuarioid = :usuarioid";
+            $stmtResultado = $pdo->prepare($queryResultado);
+            $stmtResultado->bindParam(':usuarioid', $usuarioid);
+            $stmtResultado->execute();
+
             $queryUsuario = "DELETE FROM usuario WHERE usuarioid = :usuarioid AND nombres = :nombres";
             $stmtUsuario = $pdo->prepare($queryUsuario);
             $stmtUsuario->bindParam(':usuarioid', $usuarioid);
@@ -20,18 +28,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 
             if ($stmtUsuario->execute()) {
                 if ($stmtUsuario->rowCount() > 0) {
-                    echo json_encode(["status" => "success", "message" => "Usuario eliminado con éxito."]);
+                    echo json_encode([
+                        "status" => "success",
+                        "message" => "Usuario y sus resultados eliminados con éxito."
+                    ]);
                 } else {
-                    echo json_encode(["status" => "error", "message" => "No se encontró un usuario con ese ID y nombre."]);
+                    echo json_encode([
+                        "status" => "error",
+                        "message" => "No se encontró un usuario con ese ID y nombre."
+                    ]);
                 }
             } else {
-                echo json_encode(["status" => "error", "message" => "Error al eliminar el usuario."]);
+                echo json_encode([
+                    "status" => "error",
+                    "message" => "Error al eliminar el usuario."
+                ]);
             }
         } catch (PDOException $e) {
-            echo json_encode(["status" => "error", "message" => "Error de conexión: " . $e->getMessage()]);
+            echo json_encode([
+                "status" => "error",
+                "message" => "Error de conexión: " . $e->getMessage()
+            ]);
         }
     } else {
-        echo json_encode(["status" => "error", "message" => "Faltan parámetros requeridos."]);
+        echo json_encode([
+            "status" => "error",
+            "message" => "Faltan parámetros requeridos."
+        ]);
     }
 }
 ?>
