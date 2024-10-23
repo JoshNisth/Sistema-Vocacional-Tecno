@@ -28,6 +28,9 @@
           <li class="nav-item">
             <router-link to="/opciones" class="nav-link">Opciones</router-link> <!-- Enlace a la administración de opciones -->
           </li>
+          <li class="nav-item">
+              <router-link to="/reporte" class="nav-link">Reporte</router-link>
+            </li>
         </ul>
       </div>
     </div>

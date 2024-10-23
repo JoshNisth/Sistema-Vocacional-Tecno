@@ -6,6 +6,7 @@ import Prueba from '../components/Prueba.vue'; // Componente para Pruebas
 import Pregunta from '../components/Pregunta.vue'; // Componente para Preguntas
 import ListarUsuarios from '../components/ListarUsuarios.vue'; // Componente para Listar Usuarios
 import Opcion from '../components/Opcion.vue'; // Nuevo componente para Opciones
+import Reporte from '@/components/Reporte.vue';
 
 const routes = [
   {
@@ -44,9 +45,15 @@ const routes = [
     component: Opcion, // Nueva ruta para la administración de Opciones
   },
   {
+    path: '/reporte',
+    name: 'Reporte',
+    component: Reporte,
+  },
+  {
     path: '/',
     redirect: '/login', // Redirige a login por defecto
   },
+  // Otras rutas...
 ];
 
 const router = createRouter({
