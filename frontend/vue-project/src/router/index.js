@@ -1,10 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Register from '../components/Register.vue';
 import Login from '../components/Login.vue';
-import TipoPregunta from '../components/TipoPregunta.vue'; // Nuevo componente para Tipos de Pregunta
-import Prueba from '../components/Prueba.vue'; // Nuevo componente para Pruebas
-import Pregunta from '../components/Pregunta.vue'; // Nuevo componente para Preguntas
-import ListarUsuarios from '../components/ListarUsuarios.vue'
+import TipoPregunta from '../components/TipoPregunta.vue'; // Componente para Tipos de Pregunta
+import Prueba from '../components/Prueba.vue'; // Componente para Pruebas
+import Pregunta from '../components/Pregunta.vue'; // Componente para Preguntas
+import ListarUsuarios from '../components/ListarUsuarios.vue'; // Componente para Listar Usuarios
+import Opcion from '../components/Opcion.vue'; // Nuevo componente para Opciones
+
 const routes = [
   {
     path: '/register',
@@ -17,7 +19,7 @@ const routes = [
     component: Login,
   },
   {
-    path: '/usuarios',  // Nueva ruta para listar usuarios
+    path: '/usuarios',  // Ruta para listar usuarios
     name: 'ListarUsuarios',
     component: ListarUsuarios,
   },
@@ -36,7 +38,11 @@ const routes = [
     name: 'Pregunta',
     component: Pregunta, // Ruta para la administración de Preguntas
   },
-  
+  {
+    path: '/opciones',
+    name: 'Opcion',
+    component: Opcion, // Nueva ruta para la administración de Opciones
+  },
   {
     path: '/',
     redirect: '/login', // Redirige a login por defecto
