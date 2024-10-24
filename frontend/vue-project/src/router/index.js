@@ -7,6 +7,8 @@ import Pregunta from '../components/Pregunta.vue'; // Componente para Preguntas
 import ListarUsuarios from '../components/ListarUsuarios.vue'; // Componente para Listar Usuarios
 import Opcion from '../components/Opcion.vue'; // Nuevo componente para Opciones
 import Reporte from '@/components/Reporte.vue';
+import Intereses from '../components/interes.vue'; // Importar el nuevo componente
+import InteresesUsuario from '../components/intereses_usuario.vue'; // Importar el nuevo componente
 
 const routes = [
   {
@@ -53,7 +55,16 @@ const routes = [
     path: '/',
     redirect: '/login', // Redirige a login por defecto
   },
-  // Otras rutas...
+  {
+    path: '/intereses', 
+    name: 'Intereses',
+    component: Intereses,
+  },
+  {
+    path: '/intereses_usuario', 
+    name: 'InteresesUsuario', 
+    component: InteresesUsuario, 
+  }
 ];
 
 const router = createRouter({

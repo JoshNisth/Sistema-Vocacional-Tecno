@@ -31,6 +31,12 @@
           <li class="nav-item">
               <router-link to="/reporte" class="nav-link">Reporte</router-link>
             </li>
+            <li>
+            <router-link to="/intereses" class="nav-link">Intereses</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/intereses_usuario" class="nav-link">Intereses Usuario</router-link>
+          </li>
         </ul>
       </div>
     </div>
@@ -45,4 +51,5 @@ export default {
 
 <style scoped>
 /* Estilos específicos para la navbar si lo deseas */
+/* Aquí puedes agregar estilos específicos para la navbar si lo deseas */
 </style>
