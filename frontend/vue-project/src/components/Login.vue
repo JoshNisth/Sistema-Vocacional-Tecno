@@ -29,23 +29,33 @@ export default {
     };
   },
   methods: {
-    async loginUser() {
-      try {
-        const data = {
-          Email: this.email,
-          Contrasena: this.contrasena,
-        };
-        const response = await axios.post('http://localhost/Sistema-Vocacional-Tecno/backend/api/usuarios.php?login', data, {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        this.message = response.data.message; // Maneja la respuesta de inicio de sesión
-      } catch (error) {
-        this.message = 'Error al iniciar sesión: ' + (error.response?.data?.message || error.message);
+  async loginUser() {
+    try {
+      const data = {
+        Email: this.email,
+        Contrasena: this.contrasena,
+      };
+      const response = await axios.post('http://localhost/Sistema-Vocacional-Tecno/backend/api/usuarios.php?login', data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      
+      console.log(response); // Agregar un console.log para depurar la respuesta
+
+      if (response.data.success) {
+        // Redirigir a ListarUsuarios
+        this.$router.push({ name: 'ListarUsuarios' });
+      } else {
+        this.message = response.data.message || 'Credenciales incorrectas';
       }
-    },
+    } catch (error) {
+      console.error('Error en el login:', error); // Agregar para verificar errores
+      this.message = 'Error al iniciar sesión: ' + (error.response?.data?.message || error.message);
+    }
   },
+},
+
 };
 </script>
 
