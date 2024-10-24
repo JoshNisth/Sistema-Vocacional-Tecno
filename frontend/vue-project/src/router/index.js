@@ -9,6 +9,7 @@ import Opcion from '../components/Opcion.vue'; // Nuevo componente para Opciones
 import Reporte from '@/components/Reporte.vue';
 import Intereses from '../components/interes.vue'; // Importar el nuevo componente
 import InteresesUsuario from '../components/intereses_usuario.vue'; // Importar el nuevo componente
+import RealizarPrueba from '@/components/RealizarPrueba.vue';
 
 const routes = [
   {
@@ -51,6 +52,12 @@ const routes = [
     name: 'Reporte',
     component: Reporte,
   },
+  {
+    path: '/realizarPrueba',
+    name: 'RPrueba',
+    component: RealizarPrueba, // Ruta para la administración de Preguntas
+  },
+  
   {
     path: '/',
     redirect: '/login', // Redirige a login por defecto

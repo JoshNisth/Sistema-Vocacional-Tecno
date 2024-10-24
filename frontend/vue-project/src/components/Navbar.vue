@@ -37,6 +37,9 @@
           <li class="nav-item">
             <router-link to="/intereses_usuario" class="nav-link">Intereses Usuario</router-link>
           </li>
+          <li>
+            <router-link to="/realizarPrueba" class="nav-link">Realizar Prueba</router-link>
+          </li>
         </ul>
       </div>
     </div>
