@@ -25,6 +25,9 @@
           <li class="nav-item">
             <router-link to="/preguntas" class="nav-link">Preguntas</router-link>
           </li>
+          <li class="nav-item">
+            <router-link to="/realizarPrueba" class="nav-link">Realizar Prueba</router-link>
+          </li>
         </ul>
       </div>
     </div>

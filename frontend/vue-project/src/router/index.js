@@ -5,6 +5,7 @@ import TipoPregunta from '../components/TipoPregunta.vue'; // Nuevo componente p
 import Prueba from '../components/Prueba.vue'; // Nuevo componente para Pruebas
 import Pregunta from '../components/Pregunta.vue'; // Nuevo componente para Preguntas
 import ListarUsuarios from '../components/ListarUsuarios.vue'
+import RealizarPrueba from '@/components/RealizarPrueba.vue';
 const routes = [
   {
     path: '/register',
@@ -35,6 +36,11 @@ const routes = [
     path: '/preguntas',
     name: 'Pregunta',
     component: Pregunta, // Ruta para la administración de Preguntas
+  },
+  {
+    path: '/realizarPrueba',
+    name: 'RPrueba',
+    component: RealizarPrueba, // Ruta para la administración de Preguntas
   },
   
   {
